@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_admin_proyectosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="comentario_por_tarea">
+    <Key>
+      <PropertyRef Name="id_comentario" />
+    </Key>
+    <Property Name="id_comentario" Type="int" Nullable="false" />
+    <Property Name="comentario" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="fecha_comentario" Type="date" Nullable="false" />
+    <Property Name="cod_tarea" Type="int" Nullable="false" />
+    <Property Name="cod_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="comentarios_foro">
+    <Key>
+      <PropertyRef Name="id_comentario_foro" />
+    </Key>
+    <Property Name="id_comentario_foro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="comentario" Type="nvarchar" MaxLength="255" />
+    <Property Name="fecha_comentario" Type="datetime" Nullable="false" />
+    <Property Name="cod_foro" Type="int" Nullable="false" />
+    <Property Name="cod_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="estado">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="id_estado" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="foro">
+    <Key>
+      <PropertyRef Name="id_foro" />
+    </Key>
+    <Property Name="id_foro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_proyecto" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="historico_tarea">
+    <Key>
+      <PropertyRef Name="id_log" />
+    </Key>
+    <Property Name="id_log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_tarea" Type="int" Nullable="false" />
+    <Property Name="cod_usuarioProyecto" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="observacion" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="fecha_cambio" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="proyecto">
+    <Key>
+      <PropertyRef Name="id_proyecto" />
+    </Key>
+    <Property Name="id_proyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_proyecto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="admin_asignado" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="cod_estado" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tarea">
+    <Key>
+      <PropertyRef Name="id_tarea" />
+    </Key>
+    <Property Name="id_tarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="observacion" Type="nvarchar" MaxLength="250" />
+    <Property Name="cod_proyecto" Type="int" Nullable="false" />
+    <Property Name="cod_estado" Type="smallint" Nullable="false" />
+    <Property Name="cod_usuarioAsignado" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios_por_proyecto">
+    <Key>
+      <PropertyRef Name="id_usuarioProyecto" />
+    </Key>
+    <Property Name="id_usuarioProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cod_usuario" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="cod_proyecto" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_comentarioForo_Foro">
+    <End Role="foro" Type="Self.foro" Multiplicity="1" />
+    <End Role="comentarios_foro" Type="Self.comentarios_foro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="foro">
+        <PropertyRef Name="id_foro" />
+      </Principal>
+      <Dependent Role="comentarios_foro">
+        <PropertyRef Name="cod_foro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_comentarioTarea_tarea">
+    <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
+    <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tarea">
+        <PropertyRef Name="id_tarea" />
+      </Principal>
+      <Dependent Role="comentario_por_tarea">
+        <PropertyRef Name="cod_tarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_foro_proyecto">
+    <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+    <End Role="foro" Type="Self.foro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proyecto">
+        <PropertyRef Name="id_proyecto" />
+      </Principal>
+      <Dependent Role="foro">
+        <PropertyRef Name="cod_proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_historico_tarea">
+    <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
+    <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tarea">
+        <PropertyRef Name="id_tarea" />
+      </Principal>
+      <Dependent Role="historico_tarea">
+        <PropertyRef Name="cod_tarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_proyecto_estado">
+    <End Role="estado" Type="Self.estado" Multiplicity="1" />
+    <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="proyecto">
+        <PropertyRef Name="cod_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tarea_estado">
+    <End Role="estado" Type="Self.estado" Multiplicity="1" />
+    <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="tarea">
+        <PropertyRef Name="cod_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tarea_proyecto">
+    <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+    <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proyecto">
+        <PropertyRef Name="id_proyecto" />
+      </Principal>
+      <Dependent Role="tarea">
+        <PropertyRef Name="cod_proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuarioProyecto_Proyecto">
+    <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
+    <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proyecto">
+        <PropertyRef Name="id_proyecto" />
+      </Principal>
+      <Dependent Role="usuarios_por_proyecto">
+        <PropertyRef Name="cod_proyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_admin_proyectosModelStoreContainer">
+    <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="foro" EntityType="Self.foro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="historico_tarea" EntityType="Self.historico_tarea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="proyecto" EntityType="Self.proyecto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tarea" EntityType="Self.tarea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios_por_proyecto" EntityType="Self.usuarios_por_proyecto" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_comentarioForo_Foro" Association="Self.fk_comentarioForo_Foro">
+      <End Role="foro" EntitySet="foro" />
+      <End Role="comentarios_foro" EntitySet="comentarios_foro" />
+    </AssociationSet>
+    <AssociationSet Name="fk_comentarioTarea_tarea" Association="Self.fk_comentarioTarea_tarea">
+      <End Role="tarea" EntitySet="tarea" />
+      <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+    </AssociationSet>
+    <AssociationSet Name="fk_foro_proyecto" Association="Self.fk_foro_proyecto">
+      <End Role="proyecto" EntitySet="proyecto" />
+      <End Role="foro" EntitySet="foro" />
+    </AssociationSet>
+    <AssociationSet Name="fk_historico_tarea" Association="Self.fk_historico_tarea">
+      <End Role="tarea" EntitySet="tarea" />
+      <End Role="historico_tarea" EntitySet="historico_tarea" />
+    </AssociationSet>
+    <AssociationSet Name="fk_proyecto_estado" Association="Self.fk_proyecto_estado">
+      <End Role="estado" EntitySet="estado" />
+      <End Role="proyecto" EntitySet="proyecto" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tarea_estado" Association="Self.fk_tarea_estado">
+      <End Role="estado" EntitySet="estado" />
+      <End Role="tarea" EntitySet="tarea" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tarea_proyecto" Association="Self.fk_tarea_proyecto">
+      <End Role="proyecto" EntitySet="proyecto" />
+      <End Role="tarea" EntitySet="tarea" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuarioProyecto_Proyecto" Association="Self.fk_usuarioProyecto_Proyecto">
+      <End Role="proyecto" EntitySet="proyecto" />
+      <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

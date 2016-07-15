@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_admin_proyectosModelStoreContainer" CdmEntityContainer="db_admin_proyectosEntities">
+    <EntitySetMapping Name="comentario_por_tarea">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.comentario_por_tarea">
+        <MappingFragment StoreEntitySet="comentario_por_tarea">
+          <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+          <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
+          <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comentarios_foro">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.comentarios_foro">
+        <MappingFragment StoreEntitySet="comentarios_foro">
+          <ScalarProperty Name="id_comentario_foro" ColumnName="id_comentario_foro" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="fecha_comentario" ColumnName="fecha_comentario" />
+          <ScalarProperty Name="cod_foro" ColumnName="cod_foro" />
+          <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estado">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.estado">
+        <MappingFragment StoreEntitySet="estado">
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="foro">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.foro">
+        <MappingFragment StoreEntitySet="foro">
+          <ScalarProperty Name="id_foro" ColumnName="id_foro" />
+          <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="historico_tarea">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.historico_tarea">
+        <MappingFragment StoreEntitySet="historico_tarea">
+          <ScalarProperty Name="id_log" ColumnName="id_log" />
+          <ScalarProperty Name="cod_tarea" ColumnName="cod_tarea" />
+          <ScalarProperty Name="cod_usuarioProyecto" ColumnName="cod_usuarioProyecto" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+          <ScalarProperty Name="fecha_cambio" ColumnName="fecha_cambio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="proyecto">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.proyecto">
+        <MappingFragment StoreEntitySet="proyecto">
+          <ScalarProperty Name="id_proyecto" ColumnName="id_proyecto" />
+          <ScalarProperty Name="nombre_proyecto" ColumnName="nombre_proyecto" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="admin_asignado" ColumnName="admin_asignado" />
+          <ScalarProperty Name="cod_estado" ColumnName="cod_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tarea">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.tarea">
+        <MappingFragment StoreEntitySet="tarea">
+          <ScalarProperty Name="id_tarea" ColumnName="id_tarea" />
+          <ScalarProperty Name="observacion" ColumnName="observacion" />
+          <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
+          <ScalarProperty Name="cod_estado" ColumnName="cod_estado" />
+          <ScalarProperty Name="cod_usuarioAsignado" ColumnName="cod_usuarioAsignado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios_por_proyecto">
+      <EntityTypeMapping TypeName="db_admin_proyectosModel.usuarios_por_proyecto">
+        <MappingFragment StoreEntitySet="usuarios_por_proyecto">
+          <ScalarProperty Name="id_usuarioProyecto" ColumnName="id_usuarioProyecto" />
+          <ScalarProperty Name="cod_usuario" ColumnName="cod_usuario" />
+          <ScalarProperty Name="cod_proyecto" ColumnName="cod_proyecto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
