@@ -21,5 +21,6 @@ namespace ProjectPro.Models
         public System.DateTime fecha_cambio { get; set; }
     
         public virtual tarea tarea { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

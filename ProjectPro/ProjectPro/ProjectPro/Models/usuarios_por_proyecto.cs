@@ -19,5 +19,6 @@ namespace ProjectPro.Models
         public int cod_proyecto { get; set; }
     
         public virtual proyecto proyecto { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

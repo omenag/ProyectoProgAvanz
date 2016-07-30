@@ -33,5 +33,10 @@ namespace ProjectPro.Models
         public virtual DbSet<proyecto> proyecto { get; set; }
         public virtual DbSet<tarea> tarea { get; set; }
         public virtual DbSet<usuarios_por_proyecto> usuarios_por_proyecto { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
     }
 }

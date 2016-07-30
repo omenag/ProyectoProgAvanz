@@ -21,6 +21,20 @@
         <AssociationConnector Association="db_admin_proyectosModel.fk_historico_tarea" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel.fk_tarea_proyecto" ManuallyRouted="false" />
         <AssociationConnector Association="db_admin_proyectosModel.fk_usuarioProyecto_Proyecto" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_admin_proyectosModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="db_admin_proyectosModel.AspNetRoles" Width="1.5" PointX="10.75" PointY="2.75" />
+        <EntityTypeShape EntityType="db_admin_proyectosModel.AspNetUserClaims" Width="1.5" PointX="15.25" PointY="3.875" />
+        <EntityTypeShape EntityType="db_admin_proyectosModel.AspNetUserLogins" Width="1.5" PointX="15.25" PointY="1.375" />
+        <EntityTypeShape EntityType="db_admin_proyectosModel.AspNetUsers" Width="1.5" PointX="13" PointY="1.125" />
+        <AssociationConnector Association="db_admin_proyectosModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="db_admin_proyectosModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="db_admin_proyectosModel.fk_comentarioForo_Usuario" />
+        <AssociationConnector Association="db_admin_proyectosModel.fk_comentarioTarea_Usuario" />
+        <AssociationConnector Association="db_admin_proyectosModel.fk_historico_usuario" />
+        <AssociationConnector Association="db_admin_proyectosModel.fk_proyecto_usuario" />
+        <AssociationConnector Association="db_admin_proyectosModel.fk_tarea_usuarioAsignado" />
+        <AssociationConnector Association="db_admin_proyectosModel.fk_usuarioProyecto_usuario" />
+        <AssociationConnector Association="db_admin_proyectosModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

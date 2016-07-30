@@ -1,0 +1,112 @@
+﻿@model ProjectPro.Models.AspNetUsers
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AspNetUsers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.EmailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.EmailConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.PasswordHash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.PasswordHash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.SecurityStamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.SecurityStamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.PhoneNumberConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.PhoneNumberConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.TwoFactorEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.TwoFactorEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.LockoutEndDateUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.LockoutEndDateUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.LockoutEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.LockoutEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.AccessFailedCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.AccessFailedCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item1.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -33,5 +33,6 @@ namespace ProjectPro.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historico_tarea> historico_tarea { get; set; }
         public virtual proyecto proyecto { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

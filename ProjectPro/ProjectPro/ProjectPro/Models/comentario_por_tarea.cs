@@ -21,5 +21,6 @@ namespace ProjectPro.Models
         public string cod_usuario { get; set; }
     
         public virtual tarea tarea { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

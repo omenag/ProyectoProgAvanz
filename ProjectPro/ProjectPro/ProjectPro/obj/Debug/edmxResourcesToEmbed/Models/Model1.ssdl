@@ -1,5 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="db_admin_proyectosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
   <EntityType Name="comentario_por_tarea">
     <Key>
       <PropertyRef Name="id_comentario" />
@@ -84,6 +145,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_comentarioForo_Usuario">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="comentarios_foro" Type="Self.comentarios_foro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="comentarios_foro">
+        <PropertyRef Name="cod_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_comentarioTarea_tarea">
     <End Role="tarea" Type="Self.tarea" Multiplicity="1" />
     <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
@@ -93,6 +166,74 @@
       </Principal>
       <Dependent Role="comentario_por_tarea">
         <PropertyRef Name="cod_tarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_comentarioTarea_Usuario">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="comentario_por_tarea" Type="Self.comentario_por_tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="comentario_por_tarea">
+        <PropertyRef Name="cod_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -120,6 +261,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_historico_usuario">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="historico_tarea" Type="Self.historico_tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="historico_tarea">
+        <PropertyRef Name="cod_usuarioProyecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_proyecto_estado">
     <End Role="estado" Type="Self.estado" Multiplicity="1" />
     <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
@@ -129,6 +282,18 @@
       </Principal>
       <Dependent Role="proyecto">
         <PropertyRef Name="cod_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_proyecto_usuario">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="proyecto" Type="Self.proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="proyecto">
+        <PropertyRef Name="admin_asignado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -156,6 +321,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_tarea_usuarioAsignado">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="tarea" Type="Self.tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tarea">
+        <PropertyRef Name="cod_usuarioAsignado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_usuarioProyecto_Proyecto">
     <End Role="proyecto" Type="Self.proyecto" Multiplicity="1" />
     <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
@@ -168,7 +345,25 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_usuarioProyecto_usuario">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="usuarios_por_proyecto" Type="Self.usuarios_por_proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="usuarios_por_proyecto">
+        <PropertyRef Name="cod_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="db_admin_proyectosModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="comentario_por_tarea" EntityType="Self.comentario_por_tarea" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="comentarios_foro" EntityType="Self.comentarios_foro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="estado" EntityType="Self.estado" Schema="dbo" store:Type="Tables" />
@@ -181,9 +376,33 @@
       <End Role="foro" EntitySet="foro" />
       <End Role="comentarios_foro" EntitySet="comentarios_foro" />
     </AssociationSet>
+    <AssociationSet Name="fk_comentarioForo_Usuario" Association="Self.fk_comentarioForo_Usuario">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="comentarios_foro" EntitySet="comentarios_foro" />
+    </AssociationSet>
     <AssociationSet Name="fk_comentarioTarea_tarea" Association="Self.fk_comentarioTarea_tarea">
       <End Role="tarea" EntitySet="tarea" />
       <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+    </AssociationSet>
+    <AssociationSet Name="fk_comentarioTarea_Usuario" Association="Self.fk_comentarioTarea_Usuario">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="comentario_por_tarea" EntitySet="comentario_por_tarea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
     </AssociationSet>
     <AssociationSet Name="fk_foro_proyecto" Association="Self.fk_foro_proyecto">
       <End Role="proyecto" EntitySet="proyecto" />
@@ -193,8 +412,16 @@
       <End Role="tarea" EntitySet="tarea" />
       <End Role="historico_tarea" EntitySet="historico_tarea" />
     </AssociationSet>
+    <AssociationSet Name="fk_historico_usuario" Association="Self.fk_historico_usuario">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="historico_tarea" EntitySet="historico_tarea" />
+    </AssociationSet>
     <AssociationSet Name="fk_proyecto_estado" Association="Self.fk_proyecto_estado">
       <End Role="estado" EntitySet="estado" />
+      <End Role="proyecto" EntitySet="proyecto" />
+    </AssociationSet>
+    <AssociationSet Name="fk_proyecto_usuario" Association="Self.fk_proyecto_usuario">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="proyecto" EntitySet="proyecto" />
     </AssociationSet>
     <AssociationSet Name="fk_tarea_estado" Association="Self.fk_tarea_estado">
@@ -205,8 +432,16 @@
       <End Role="proyecto" EntitySet="proyecto" />
       <End Role="tarea" EntitySet="tarea" />
     </AssociationSet>
+    <AssociationSet Name="fk_tarea_usuarioAsignado" Association="Self.fk_tarea_usuarioAsignado">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="tarea" EntitySet="tarea" />
+    </AssociationSet>
     <AssociationSet Name="fk_usuarioProyecto_Proyecto" Association="Self.fk_usuarioProyecto_Proyecto">
       <End Role="proyecto" EntitySet="proyecto" />
+      <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuarioProyecto_usuario" Association="Self.fk_usuarioProyecto_usuario">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="usuarios_por_proyecto" EntitySet="usuarios_por_proyecto" />
     </AssociationSet>
   </EntityContainer>

@@ -35,5 +35,6 @@ namespace ProjectPro.Models
         public virtual ICollection<tarea> tarea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarios_por_proyecto> usuarios_por_proyecto { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }
