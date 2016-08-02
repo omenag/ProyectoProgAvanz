@@ -230,6 +230,5 @@ C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\b
 C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\obj\Debug\ProjectPro.csprojResolveAssemblyReference.cache
 C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\obj\Debug\ProjectPro.dll
 C:\Users\Oscar\Source\Repos\ProyectoProgAvanz\ProjectPro\ProjectPro\ProjectPro\obj\Debug\ProjectPro.pdb

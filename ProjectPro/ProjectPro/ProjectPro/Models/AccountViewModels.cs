@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Componentmodel.Item1.DataAnnotations;
+ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectPro.Models
 {

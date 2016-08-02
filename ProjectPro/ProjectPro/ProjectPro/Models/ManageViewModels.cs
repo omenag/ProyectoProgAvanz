@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Componentmodel.Item1.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectPro.Models
 {
